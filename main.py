@@ -35,29 +35,29 @@ if __name__ == "__main__":
     
 
 
-    # epochs = 10
-    # model.train
-    # for epoch in range(epochs):
-    #     avg_cost = 0
-    #     for X, Y in data_loader:
-    #         X = X.to(device)
-    #         Y = Y.to(device)
+    epochs = 10
+    model.train
+    for epoch in range(epochs):
+        avg_cost = 0
+        for X, Y in data_loader:
+            X = X.to(device)
+            Y = Y.to(device)
 
-    #         optimizer.zero_grad()
-    #         out = net(X)
-    #         loss = loss_func(out,Y)
-    #         loss.backward()
-    #         optimizer.step()
+            optimizer.zero_grad()
+            out = net(X)
+            loss = loss_func(out,Y)
+            loss.backward()
+            optimizer.step()
 
-    #         avg_cost += loss / total_batch
+            avg_cost += loss / total_batch
         
-    #     print('Epoch:{} cost = {}'.format(epoch+1,avg_cost))
-    # print('Learning Finished!')
+        print('Epoch:{} cost = {}'.format(epoch+1,avg_cost))
+    print('Learning Finished!')
 
-    # if not os.path.exists('./model'):
-    #     os.mkdir('./model')
+    if not os.path.exists('./model'):
+        os.mkdir('./model')
 
-    # torch.save(model.state_dict(),"./model/vgg11_model.pth")
+    torch.save(model.state_dict(),"./model/vgg11_model.pth")
     
     test_net = net.to(device)
     test_net.load_state_dict(torch.load('./model/vgg11_model.pth'))
@@ -80,5 +80,7 @@ if __name__ == "__main__":
             correct_prediction = (torch.argmax(prediction, 1) == label)
             accuracy = correct_prediction.float().mean()
             print('Accuracy:', accuracy.item())
+
+    exit()
 
 
